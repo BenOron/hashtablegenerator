@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <tite>Hash Table Generator</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+        <script>
+            function hashit() {
+                var value =   document.getElementById("word").value;
+                var div =  document.getElementById("table");
+                var text =  document.getElementById("wordText");
+                var url = "hashit.php";
+                if (value != "") {
+                    text.innerHTML="<h2>Generated Table For:" + value + "</h2>";
+                    div.innerHTML= "Loading...";
+                    var xml = new XMLHttpRequest();
+                    xml.open("POST", url, false);
+                    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xml.onreadystatechange = function() {
+                        if (xml.readyState == 4 && xml.status == 200) {
+                            debugger;
+                            div.innerHTML= xml.responseText;
+                        }
+                    }
+                    var v = "word=" + value;
+                    xml.send(v);
+                }else if(value== ""){
+                    debugger;
+                    text.innerHTML = "";
+                   div.innerHTML = "";
+                };
+            }
+        </script>
+        <style type="text/css">
+            body {
+                background-repeat: no-repeat;
+                background: rgba(147, 206, 222, 1);
+                background: -moz-linear-gradient(-45deg, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+                background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(147, 206, 222, 1)), color-stop(41%, rgba(117, 189, 209, 1)), color-stop(100%, rgba(73, 165, 191, 1)));
+                background: -webkit-linear-gradient(-45deg, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+                background: -o-linear-gradient(-45deg, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+                background: -ms-linear-gradient(-45deg, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+                background: linear-gradient(135deg, rgba(147, 206, 222, 1) 0%, rgba(117, 189, 209, 1) 41%, rgba(73, 165, 191, 1) 100%);
+                filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1);
+            }
+            
+            #wrapper {
+                width: 100%;
+                text-align: center;
+            }
+            
+            h1 {
+                font-family: tahoma;
+                background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#2ED8FE));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            input {
+                font-size: 16px;
+                text-shadow: #ccc 2px 2px;
+                font-weight: bold;
+                width: 70%;
+            }
+        </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Hash Table Generator</h1>
+        <input type="text" name="word" id="word" onkeyup="hashit()" length="75" />
+        <br>
+        <span id="wordText"> </span>
+        <div id="table">
+
+        </div>
+    </div>
+</body>
+
+</html>
